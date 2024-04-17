@@ -48,4 +48,4 @@ jobs:
         app-name: 'ayu-user'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_1fc45735f3d5450f8a0d42b20b109873 }}
-        images: 'ayulanka.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_1a3783fb50eb4281bbc54a65ed7e2934 }}/ayulanka/user-management:${{ github.sha }}'
+        images: 'ayulanka.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_1a3783fb50eb4281bbc54a65ed7e2934 }}/user-management:${{ github.sha }}'
