@@ -31,7 +31,7 @@ jobs:
       with:
         push: true
         tags: ayulanka.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_1a3783fb50eb4281bbc54a65ed7e2934 }}/ayulanka/user-management:${{ github.sha }}
-        file: ./userManagement/Dockerfile
+        context: ./userManagement/
 
   deploy:
     runs-on: ubuntu-latest
