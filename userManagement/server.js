@@ -11,6 +11,8 @@ app.use(cors());
 app.use(express.json());
 
 const URL = process.env.CUSTOMCONNSTR_MONGODB_URL ;
+console.log('CUSTOMCONNSTR_MONGODB_URL', URL);
+console.log('MONGODB_URL', process.env.MONGODB_URL);
 
 mongoose.connect(URL, {
   
