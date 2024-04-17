@@ -30,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: ayulanka.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_1a3783fb50eb4281bbc54a65ed7e2934 }}/ayulanka/user-management:${{ github.sha }}
+        tags: ayulanka.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_1a3783fb50eb4281bbc54a65ed7e2934 }}/user-management:${{ github.sha }}
         context: ./userManagement/
 
   deploy:
