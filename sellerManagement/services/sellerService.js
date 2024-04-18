@@ -4,7 +4,7 @@ const app = express();
 const EMailTemp = app.use(express.static(__dirname + '/public'))
 const mongoose = require("mongoose");
 let Seller = require("../models/seller");
-let Product = require("../models/product");
+// let Product = require("../models/product");
 const dotenv = require('dotenv');
 const Sib = require('sib-api-v3-sdk');
 require('dotenv').config()
