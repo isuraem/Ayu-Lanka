@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL_CART = `http://localhost:3006/cart`
+const BASE_URL_CART = `${process.env.REACT_APP_CART_MANAGEMENT_API_URL}`
 
 export const addCartItemsService = async (cart) => {
 

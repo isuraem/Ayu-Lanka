@@ -1,5 +1,5 @@
 import axios from 'axios';
-const BASE_URL = `http://localhost:3005/order`
+const BASE_URL = `${process.env.REACT_APP_PRODUCTCHECKOUT_MANAGEMENT_API_URL}`
 
 //--------------Order Services-------------------------------
 export const createOrder = async (paymentPayload) => {

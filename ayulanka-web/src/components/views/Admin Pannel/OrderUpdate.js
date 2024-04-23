@@ -50,7 +50,7 @@ function OrderUpdate({data}) {
 
                 const newOrder = { deliveryServiceID, unitPrice, quantity, total}
 
-                axios.post(`http://localhost:3005/order/updateOrder/${data._id}`, newOrder).then(() => {
+                axios.post(`${process.env.REACT_APP_PRODUCTCHECKOUT_MANAGEMENT_API_URL}/updateOrder/${data._id}`, newOrder).then(() => {
                     //alert("Rental Record successfully Updated");
                     Swal.fire({
                         title: "Order Record successfully Updated! ",

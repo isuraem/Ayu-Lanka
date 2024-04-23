@@ -1,5 +1,5 @@
 import axios from 'axios';
-const BASE_URL = `http://localhost:3002/api/product`
+const BASE_URL = `${process.env.REACT_APP_PRODUCT_MANAGEMENT_API_URL}`
 
 export const getAllProductService = async () => {
 

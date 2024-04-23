@@ -1,5 +1,5 @@
 import axios from 'axios';
-const BASE_URL = `http://localhost:3007/payment`
+const BASE_URL = `${process.env.REACT_APP_PAYMENT_MANAGEMENT_API_URL}`
 
 export const createPayment = async (paymentPayload) => {
 

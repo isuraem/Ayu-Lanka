@@ -27,7 +27,7 @@ function OrderlList() {
 
       
             function getOrder() {
-                axios.get(`http://localhost:3005/order/view`).then((res) => { //normally the fetched rental record details are displayed through this
+                axios.get(`${process.env.REACT_APP_PRODUCTCHECKOUT_MANAGEMENT_API_URL}/view`).then((res) => { //normally the fetched rental record details are displayed through this
                     //setRentals(res.data.reverse());
                     setOrderList(res.data.data);
                 }).catch((error) => {
@@ -57,7 +57,7 @@ function OrderlList() {
     }
 
     function deleteOrder(data) {
-        axios.delete(`http://localhost:3005/order/deleteOrder`, { data, }).then(() => {
+        axios.delete(`${process.env.REACT_APP_PRODUCTCHECKOUT_MANAGEMENT_API_URL}/deleteOrder`, { data, }).then(() => {
             alert("Data deleted");
             window.location.reload();
         }).catch((err) => {

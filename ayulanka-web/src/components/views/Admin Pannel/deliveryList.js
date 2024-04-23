@@ -25,7 +25,7 @@ function DeliverylList() {
 
       
             function getDelivery() {
-                axios.get(`http://localhost:3005/order/viewDelivery`).then((res) => { //normally the fetched rental record details are displayed through this
+                axios.get(`${process.env.REACT_APP_PRODUCTCHECKOUT_MANAGEMENT_API_URL}/viewDelivery`).then((res) => { //normally the fetched rental record details are displayed through this
                     //setRentals(res.data.reverse());
                     setDeliveryList(res.data.data);
                 }).catch((error) => {
@@ -55,7 +55,7 @@ function DeliverylList() {
     }
 
     function deleteDelivery(data) {
-        axios.delete(`http://localhost:3005/order/deleteDelivery`, { data, }).then(() => {
+        axios.delete(`${process.env.REACT_APP_PRODUCTCHECKOUT_MANAGEMENT_API_URL}/deleteDelivery`, { data, }).then(() => {
             alert("Data deleted");
             window.location.reload();
         }).catch((err) => {

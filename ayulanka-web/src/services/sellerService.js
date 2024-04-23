@@ -1,5 +1,5 @@
 import axios from 'axios';
-const BASE_URL = `http://localhost:3004/api/seller`
+const BASE_URL = `${process.env.REACT_APP_SELLER_MANAGEMENT_API_URL}`
 
 export const createSellerService = async (newSeller) => {
 
