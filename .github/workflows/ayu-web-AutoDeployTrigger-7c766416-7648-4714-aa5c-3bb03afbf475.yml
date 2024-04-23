@@ -35,6 +35,7 @@ jobs:
         uses: azure/container-apps-deploy-action@v2
         with:
           appSourcePath: ${{ github.workspace }}/ayulanka-web 
+          dockerFilePath: ${{ github.workspace }}/ayulanka-web/Dockerfile
           registryUrl: ayulanka.azurecr.io
           registryUsername: ${{ secrets.AYUWEB_REGISTRY_USERNAME }}
           registryPassword: ${{ secrets.AYUWEB_REGISTRY_PASSWORD }}
