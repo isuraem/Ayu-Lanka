@@ -34,7 +34,7 @@ jobs:
       - name: Build and push container image to registry
         uses: azure/container-apps-deploy-action@v2
         with:
-          appSourcePath: ${{ github.workspace }}/ayulanka-web 
+          appSourcePath: ${{ github.workspace }}/ayulanka-web/
           dockerFilePath: ${{ github.workspace }}/ayulanka-web/Dockerfile
           registryUrl: ayulanka.azurecr.io
           registryUsername: ${{ secrets.AYUWEB_REGISTRY_USERNAME }}
