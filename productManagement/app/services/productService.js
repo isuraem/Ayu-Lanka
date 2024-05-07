@@ -55,7 +55,7 @@ module.exports.getProductDetailsService = async (requestBody) => {
       throw new BadRequestException("Error in product details !!!");
     }
     // Make a request to the seller service to get seller details
-    const sellerResponse = await axios.post('http://localhost:3004/api/seller/get_Seller_details', {
+    const sellerResponse = await axios.post(`${process.env.sellerApi_link}/get_Seller_details`, {
       seller_id: productObj.shop
     });
 
