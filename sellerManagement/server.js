@@ -5,15 +5,15 @@ const dotenv = require("dotenv");
 const app = express();
 dotenv.config();
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3004;
 
 app.use(cors());
 app.use(express.json());
 
-const URL = process.env.MONGODB_URL;
+const URL = process.env.CUSTOMCONNSTR_MONGODB_URL;
+console.log('URL', URL);
 
 mongoose.connect(URL, {
-  
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -24,9 +24,9 @@ connection.once("open", () => {
   console.log("Mongodb Connection Success !" , PORT);
 });
 
-const sellerRouter = require("./routes/sellerRoutes");
+var appController = require("./app/app");
 
-app.use("/api/seller",sellerRouter);
+app.use("/api",appController);
 
 
 app.listen(PORT, () => {
