@@ -1,0 +1,14 @@
+.product-details-container {
+    min-height: 80vh;
+    /* Ensures the container takes full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-card {
+    width: 100%;
+    /* Full width on smaller screens */
+    max-width: 540px;
+    /* Max width on larger screens */
+}
