@@ -59,9 +59,10 @@ module.exports.getOneProductDetailsService = async (requestBody) => {
       seller_id: productObj.shop
     });
 
+    console.log("new", sellerResponse.data.data)
     // Assuming the response contains seller 
     const product_details = {
-      sellerDetails: sellerResponse.data,
+      sellerDetails: sellerResponse.data.data,
       productDetails: productObj
     }
 

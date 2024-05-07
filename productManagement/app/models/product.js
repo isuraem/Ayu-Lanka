@@ -58,8 +58,12 @@ const product = new Schema({
     cashOnDelivery: {
         type: Boolean,
 		default: false
+    },
+    productImages : {
+        url: {
+            type: String
+        } 
     }
-
 
 })
 
