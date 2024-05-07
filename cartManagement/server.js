@@ -24,9 +24,9 @@ connection.once("open", () => {
   console.log("Mongodb Connection Success !" , PORT);
 });
 
-const cartRoutes = require("./routes/cartRoutes")
+const cartRoutes = require("./app/app")
 
-app.use("/cart",cartRoutes)
+app.use("/api",cartRoutes)
 
 
 
