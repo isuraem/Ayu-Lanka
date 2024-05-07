@@ -31,10 +31,16 @@ module.exports = function (router) {
 
   const productController = require("../controllers/productController");
 
-  //route for add Seller
+  //route for add Product
   router.post('/add',
     jsonParser,
     productController.createProductController
+  );
+
+  //route for get Product details
+  router.post('/get_details',
+    jsonParser,
+    productController.getProductDetailsController
   );
 
 }

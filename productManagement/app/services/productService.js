@@ -1,20 +1,22 @@
 const { response } = require("express");
 const mongoose = require("mongoose");
 let Product = require("../models/product");
+const axios = require('axios');
+const BadRequestException = require("../util/exceptions/badRequestException");
 
 //create Product service for add Product
-module.exports.createProductService = async (req, res) => {
+module.exports.createProductService = async (requestBody) => {
   try {
-    const productTitle = req.productTitle;
-    const productName = req.productName;
-    const productCode = req.productCode;
-    const shop = req.shop;
-    const productPrice = Number(req.productPrice);
-    const productDiscount = Number(req.productDiscount);
-    const productQuantity = Number(req.productQuantity);
-    const productDescription = req.productDescription;
-    const productCategory = req.productCategory;
-    const cashOnDelivery = req.cashOnDelivery;
+    const productTitle = requestBody.productTitle;
+    const productName = requestBody.productName;
+    const productCode = requestBody.productCode;
+    const shop = requestBody.shop;
+    const productPrice = Number(requestBody.productPrice);
+    const productDiscount = Number(requestBody.productDiscount);
+    const productQuantity = Number(requestBody.productQuantity);
+    const productDescription = requestBody.productDescription;
+    const productCategory = requestBody.productCategory;
+    const cashOnDelivery = requestBody.cashOnDelivery;
 
     const newProduct = new Product({
       productTitle,
@@ -34,6 +36,35 @@ module.exports.createProductService = async (req, res) => {
     return {
       msg: "success",
       data: reponse,
+    };
+
+  } catch (err) {
+    throw err;
+  }
+};
+
+
+//create Product service for get Product details
+module.exports.getProductDetailsService = async (requestBody) => {
+  try {
+    const productId = requestBody.productId;
+    console.log("data", requestBody)
+    const productObj = await Product.findOne({ "_id" :productId });
+
+    if(!productObj){
+      throw new BadRequestException("Error in product details !!!");
+    }
+    // Make a request to the seller service to get seller details
+    const sellerResponse = await axios.post('http://localhost:3004/api/seller/get_Seller_details', {
+      seller_id: productObj.shop
+    });
+
+    // Assuming the response contains seller details
+    const sellerDetails = sellerResponse.data;
+
+    return {
+      msg: "success",
+      data: sellerDetails
     };
 
   } catch (err) {

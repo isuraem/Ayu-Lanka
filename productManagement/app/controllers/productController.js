@@ -76,3 +76,15 @@ module.exports.createProductController = async (req, res) => {
 	}
    
 };
+
+//controller for get Product details
+module.exports.getProductDetailsController = async (req, res) => {
+    try {
+		const productResponse = await ProductService.getProductDetailsService(req.body);
+		return res.status(200).json({ success: true, data: productResponse.data, showMessage: false });
+	} catch (err) {
+		Logger.log('getProductDetailsService', null, null,err);
+		return res.status(err.status || ResponseStatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, msg: err.msg || ResponseCommonMessages.INTERNAL_SERVER_ERROR });
+	}
+   
+};
