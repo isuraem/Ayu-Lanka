@@ -1,0 +1,12 @@
+.footer {
+    background-color: #f8f9fa; /* Light gray background */
+    padding: 20px 0; /* Padding for aesthetic spacing */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; /* Set a fixed height */
+  }
+.text-new{
+    display: flex;
+    justify-content: center;
+}
