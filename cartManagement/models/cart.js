@@ -5,11 +5,6 @@ const Schema = mongoose.Schema;
 
 const cart = new Schema({
 
-    // cartID: {
-    //     type: String,
-    //     maxlength: 100,
-    //     required: true,
-    // },
 
     item: {
         type: String,
@@ -35,7 +30,6 @@ const cart = new Schema({
 
     userId: {
         type: String,
-
     }
 
 })

@@ -24,9 +24,9 @@ connection.once("open", () => {
   console.log("Mongodb Connection Success !" , PORT);
 });
 
-const sellerRouter = require("./routes/sellerRoutes");
+var appController = require("./app/app");
 
-app.use("/api/seller",sellerRouter);
+app.use("/api",appController);
 
 
 app.listen(PORT, () => {
