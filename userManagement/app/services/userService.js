@@ -15,7 +15,7 @@ module.exports.createUserService = async (requestBody) => {
         const Email = requestBody.Email;
         const mobileNumber = requestBody.mobileNumber;
 
-        const newUser = new Seller({
+        const newUser = new User({
             name,
             address: {
                 street: street,
