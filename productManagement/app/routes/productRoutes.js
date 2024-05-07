@@ -38,9 +38,15 @@ module.exports = function (router) {
   );
 
   //route for get Product details
-  router.post('/get_details',
+  router.post('/get_one_product_details',
     jsonParser,
-    productController.getProductDetailsController
+    productController.getOneProductDetailsController
+  );
+
+  //route for get Product details
+  router.get('/get_all_product_details',
+    jsonParser,
+    productController.getAllProductDetailsController
   );
 
 }

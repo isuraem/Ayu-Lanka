@@ -45,7 +45,7 @@ module.exports.createProductService = async (requestBody) => {
 
 
 //create Product service for get Product details
-module.exports.getProductDetailsService = async (requestBody) => {
+module.exports.getOneProductDetailsService = async (requestBody) => {
   try {
     const productId = requestBody.productId;
     console.log("data", requestBody)
@@ -59,12 +59,15 @@ module.exports.getProductDetailsService = async (requestBody) => {
       seller_id: productObj.shop
     });
 
-    // Assuming the response contains seller details
-    const sellerDetails = sellerResponse.data;
+    // Assuming the response contains seller 
+    const product_details = {
+      sellerDetails: sellerResponse.data,
+      productDetails: productObj
+    }
 
     return {
       msg: "success",
-      data: sellerDetails
+      data: product_details
     };
 
   } catch (err) {
@@ -72,46 +75,22 @@ module.exports.getProductDetailsService = async (requestBody) => {
   }
 };
 
-//view product service for view all product details
-module.exports.viewProductService = async (req, res) => {
+//create Product service for get Product details
+module.exports.getAllProductDetailsService = async (requestBody) => {
   try {
-    let response = await Product.find();
+    
+    const productObj = await Product.find();
 
-    if (response) {
-      return {
-        msg: "success",
-        data: response,
-      };
-    } else {
-      return {
-        msg: "faild",
-        data: response,
-      };
+    if(!productObj){
+      throw new BadRequestException("Error in product details !!!");
     }
-  } catch {
-    throw err;
-  }
-};
 
-//view product service for view each seller product details
-module.exports.viewSellerProductService = async (req, res) => {
-  try {
+    return {
+      msg: "success",
+      data: productObj
+    };
 
-    let id = req.id;
-    let response = await Product.find({ shop: id });
-
-    if (response) {
-      return {
-        msg: "success",
-        data: response,
-      };
-    } else {
-      return {
-        msg: "faild",
-        data: response,
-      };
-    }
-  } catch {
+  } catch (err) {
     throw err;
   }
 };
