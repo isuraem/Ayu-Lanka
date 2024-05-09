@@ -90,7 +90,7 @@ const { ResponseStatusCodes } = require('../util/constants/responseStatusCodes')
 const { ResponseCommonMessages } = require('../util/constants/responseCommonMessages');
 const Logger = require('../util/logging/logger');
 
-//controller for add User
+ //route for create cart
 module.exports.createCartController = async (req, res) => {
     try {
 		const serviceResponse = await cartService.createCartService(req.body);
@@ -101,3 +101,65 @@ module.exports.createCartController = async (req, res) => {
 	}
    
 };
+
+//controller for add Item
+module.exports.addItemController = async (req, res) => {
+    try {
+		const serviceResponse = await cartService.addItemService(req.body);
+		return res.status(200).json({ success: true, data: serviceResponse.data, showMessage: false });
+	} catch (err) {
+		Logger.log('addItemService', null, null,err);
+		return res.status(err.status || ResponseStatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, msg: err.msg || ResponseCommonMessages.INTERNAL_SERVER_ERROR });
+	}
+   
+};
+
+//controller for check available Cart
+module.exports.checkAvailableCartController = async (req, res) => {
+    try {
+		const serviceResponse = await cartService.checkAvailableCartService(req.body);
+		return res.status(200).json({ success: true, data: serviceResponse.data, showMessage: false });
+	} catch (err) {
+		Logger.log('checkAvailableCartService', null, null,err);
+		return res.status(err.status || ResponseStatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, msg: err.msg || ResponseCommonMessages.INTERNAL_SERVER_ERROR });
+	}
+   
+};
+
+//controller for check available Cart
+module.exports.addItemToCartController = async (req, res) => {
+    try {
+		const serviceResponse = await cartService.addItemToCartService(req.body);
+		return res.status(200).json({ success: true, data: serviceResponse.data, showMessage: false });
+	} catch (err) {
+		Logger.log('addItemToCartService', null, null,err);
+		return res.status(err.status || ResponseStatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, msg: err.msg || ResponseCommonMessages.INTERNAL_SERVER_ERROR });
+	}
+   
+};
+
+//controller for check available Cart
+module.exports.removeItemFromCartController = async (req, res) => {
+    try {
+		const serviceResponse = await cartService.removeItemFromCartService(req.body);
+		return res.status(200).json({ success: true, data: serviceResponse.data, showMessage: false });
+	} catch (err) {
+		Logger.log('removeItemFromCartService', null, null,err);
+		return res.status(err.status || ResponseStatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, msg: err.msg || ResponseCommonMessages.INTERNAL_SERVER_ERROR });
+	}
+   
+};
+
+
+//controller for check available Cart
+module.exports.updateItemQuantityController = async (req, res) => {
+    try {
+		const serviceResponse = await cartService.updateItemQuantityService(req.body);
+		return res.status(200).json({ success: true, data: serviceResponse.data, showMessage: false });
+	} catch (err) {
+		Logger.log('updateItemQuantityService', null, null,err);
+		return res.status(err.status || ResponseStatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, msg: err.msg || ResponseCommonMessages.INTERNAL_SERVER_ERROR });
+	}
+   
+};
+
