@@ -36,10 +36,40 @@ module.exports = function (router) {
 
   const cartController = require("../controllers/cartController");
 
-  //route for add user
+  //route for create cart
   router.post('/create_cart',
     jsonParser,
     cartController.createCartController
+  );
+
+  //route for add item
+  router.post('/add_item',
+    jsonParser,
+    cartController.addItemController
+  );
+
+  //route for add item
+  router.post('/check_available_cart',
+    jsonParser,
+    cartController.checkAvailableCartController
+  );
+
+  //route for add item
+  router.post('/add_item_to_cart',
+    jsonParser,
+    cartController.addItemToCartController
+  );
+
+  //route for add item
+  router.post('/remove_item_from_cart',
+    jsonParser,
+    cartController.removeItemFromCartController
+  );
+
+  //route for add item
+  router.post('/update_item_from_cart',
+    jsonParser,
+    cartController.updateItemQuantityController
   );
 
   // //route for get Seller details

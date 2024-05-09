@@ -19,7 +19,7 @@ const cart = new Schema({
         },    
     }],
     userId: {
-        type: String,
+        type: Schema.Types.ObjectId
     },
 
     total: {
@@ -27,7 +27,7 @@ const cart = new Schema({
     },
 
     status: {
-        type: String, // 0 -> pending, 10 -> completed 
+        type: Number, // 0 -> pending, 10 -> completed 
         default: 0
     }
 
