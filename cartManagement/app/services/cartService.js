@@ -71,7 +71,7 @@ module.exports.addItemToCartService = async (requestBody) => {
         throw new BadRequestException("Error in product data fetching!!")
     }
 
-    console.log("new", productResponse.data.data)
+    
     const productDetail = productResponse.data.data.productDetails;
     const cartQuantity = 1;
     const itemPrice = productDetail.productPrice
@@ -124,6 +124,31 @@ module.exports.checkAvailableCartService = async (requestBody) => {
     throw err;
   }
 };
+
+module.exports.removeItemFromCartService  = async(requestBody) => {
+  try {
+
+      let itemID = requestBody.itemId;
+      let cartID = requestBody.cartId;
+
+      // Find the cart by its ID and update it
+      const updatedCart = await Cart.findOneAndUpdate(
+          { _id: cartID }, // Find cart by ID
+          { $pull: { item: { itemId: itemID } } }, // Remove item by itemId
+          { new: true } // Return the updated cart
+      );
+
+
+      return {
+        msg: "success",
+        data: updatedCart,
+      };
+  } catch (error) {
+      console.error("Error removing item from cart:", error);
+      throw error;
+  }
+}
+
 
 // //view Cart service for view all CArt details
 // module.exports.viewCartService = async (req, res) => {

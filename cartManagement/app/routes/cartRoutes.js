@@ -59,6 +59,13 @@ module.exports = function (router) {
     jsonParser,
     cartController.addItemToCartController
   );
+
+  //route for add item
+  router.post('/remove_item_from_cart',
+    jsonParser,
+    cartController.removeItemFromCartController
+  );
+  
   // //route for get Seller details
   // router.post('/get_Seller_details',
   //   jsonParser,
