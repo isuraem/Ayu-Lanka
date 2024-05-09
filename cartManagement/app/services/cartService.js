@@ -6,7 +6,7 @@ const axios = require('axios');
 
 module.exports.createCartService = async (requestBody) => {
   try {
-    console.log("data",requestBody )
+    console.log("data", requestBody)
     const itemId = requestBody.itemId;
     const userId = requestBody.userId;
 
@@ -14,8 +14,8 @@ module.exports.createCartService = async (requestBody) => {
       productId: itemId
     });
 
-    if(!productResponse){
-        throw new BadRequestException("Error in product data fetching!!")
+    if (!productResponse) {
+      throw new BadRequestException("Error in product data fetching!!")
     }
     console.log("new", productResponse.data.data)
     const productDetail = productResponse.data.data.productDetails;
@@ -30,7 +30,7 @@ module.exports.createCartService = async (requestBody) => {
     }
 
     itemArray.push(oneItem);
-    
+
     let total = itemPrice * cartQuantity;
 
     const newCartItem = new Cart({
@@ -57,9 +57,9 @@ module.exports.addItemToCartService = async (requestBody) => {
     const itemId = requestBody.itemId;
     const userId = requestBody.userId;
 
-    const cartObj = await Cart.findOne({ '_id': cartId , status: 0 });
+    const cartObj = await Cart.findOne({ '_id': cartId, status: 0 });
 
-    if(!cartObj){
+    if (!cartObj) {
       throw new BadRequestException("Cart not found!!")
     }
 
@@ -67,11 +67,11 @@ module.exports.addItemToCartService = async (requestBody) => {
       productId: itemId
     });
 
-    if(!productResponse){
-        throw new BadRequestException("Error in product data fetching!!")
+    if (!productResponse) {
+      throw new BadRequestException("Error in product data fetching!!")
     }
 
-    
+
     const productDetail = productResponse.data.data.productDetails;
     const cartQuantity = 1;
     const itemPrice = productDetail.productPrice
@@ -85,11 +85,11 @@ module.exports.addItemToCartService = async (requestBody) => {
 
     itemArray.push(oneItem);
     let total = 0;
-    
-    for(let i=0; i < itemArray.length; i++){
+
+    for (let i = 0; i < itemArray.length; i++) {
       total += itemArray[i].itemPrice * itemArray[i].quantity;
     }
-    
+
     cartObj.item = itemArray;
     cartObj.total = total;
     await cartObj.save();
@@ -110,9 +110,9 @@ module.exports.checkAvailableCartService = async (requestBody) => {
 
     const userId = requestBody.userId;
 
-    const cartObj = await Cart.findOne({ 'userId': userId , status: 0 });
+    const cartObj = await Cart.findOne({ 'userId': userId, status: 0 });
 
-    if(!cartObj){
+    if (!cartObj) {
       throw new BadRequestException("Cart not found!!")
     }
 
@@ -125,30 +125,75 @@ module.exports.checkAvailableCartService = async (requestBody) => {
   }
 };
 
-module.exports.removeItemFromCartService  = async(requestBody) => {
+module.exports.removeItemFromCartService = async (requestBody) => {
   try {
 
-      let itemID = requestBody.itemId;
-      let cartID = requestBody.cartId;
+    let itemID = requestBody.itemId;
+    let cartID = requestBody.cartId;
 
-      // Find the cart by its ID and update it
-      const updatedCart = await Cart.findOneAndUpdate(
-          { _id: cartID }, // Find cart by ID
-          { $pull: { item: { itemId: itemID } } }, // Remove item by itemId
-          { new: true } // Return the updated cart
-      );
+    // Find the cart by its ID and update it
+    const updatedCart = await Cart.findOneAndUpdate(
+      { _id: cartID }, // Find cart by ID
+      { $pull: { item: { itemId: itemID } } }, // Remove item by itemId
+      { new: true } // Return the updated cart
+    );
 
+    let total = 0;
+    for (const item of updatedCart.item) {
+      total += item.quantity * item.itemPrice;
+    }
 
-      return {
-        msg: "success",
-        data: updatedCart,
-      };
+    // Update total in the cart
+    updatedCart.total = total;
+
+    // Save the updated cart
+    await updatedCart.save();
+    
+    return {
+      msg: "success",
+      data: updatedCart,
+    };
   } catch (error) {
-      console.error("Error removing item from cart:", error);
-      throw error;
+    console.error("Error removing item from cart:", error);
+    throw error;
   }
 }
 
+module.exports.updateItemQuantityService = async (requestBody) => {
+  try {
+
+    let itemID = requestBody.itemId;
+    let cartID = requestBody.cartId;
+    let newQuantity = requestBody.quantity;
+
+    // Find the cart by its ID and update it
+    const updatedCart = await Cart.findOneAndUpdate(
+      { _id: cartID, "item.itemId": itemID }, // Find cart by ID and itemId
+      { $set: { "item.$.quantity": newQuantity } }, // Update quantity of the specified item
+      { new: true } // Return the updated cart
+    );
+
+    let total = 0;
+    for (const item of updatedCart.item) {
+      total += item.quantity * item.itemPrice;
+    }
+
+    // Update total in the cart
+    updatedCart.total = total;
+
+    // Save the updated cart
+    await updatedCart.save();
+
+    return {
+      msg: "success",
+      data: updatedCart,
+    };
+  } catch (error) {
+    // Handle error
+    console.error("Error updating item quantity:", error);
+    throw error; // Optionally rethrow the error for handling further up the call stack
+  }
+}
 
 // //view Cart service for view all CArt details
 // module.exports.viewCartService = async (req, res) => {

@@ -149,3 +149,17 @@ module.exports.removeItemFromCartController = async (req, res) => {
 	}
    
 };
+
+
+//controller for check available Cart
+module.exports.updateItemQuantityController = async (req, res) => {
+    try {
+		const serviceResponse = await cartService.updateItemQuantityService(req.body);
+		return res.status(200).json({ success: true, data: serviceResponse.data, showMessage: false });
+	} catch (err) {
+		Logger.log('updateItemQuantityService', null, null,err);
+		return res.status(err.status || ResponseStatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, msg: err.msg || ResponseCommonMessages.INTERNAL_SERVER_ERROR });
+	}
+   
+};
+
