@@ -1,28 +1,43 @@
+const express = require("express");
+const cors = require("cors");
+const helmet = require("helmet");
+const morgan = require("morgan");
+const { createProxyMiddleware } = require("http-proxy-middleware");
+
+// Create an instance of Express app
+const app = express();
+
+// Middleware setup
+app.use(cors()); // Enable CORS
+app.use(helmet()); // Add security headers
+app.use(morgan("combined")); // Log HTTP requests
+app.disable("x-powered-by"); // Hide Express server information
+
 // Define routes and corresponding microservices
 const services = [
   {
-    route: "/user",
-    target: `${process.env.REACT_APP_USER_MANAGEMENT_API_URL}`,
+    route: "/api/user",
+    target: `${process.env.USER_MANAGEMENT_API_URL}/api/user`,
   },
   {
-    route: "/product",
-    target: `${process.env.REACT_APP_PRODUCT_MANAGEMENT_API_URL}`,
+    route: "/api/product",
+    target: `${process.env.PRODUCT_MANAGEMENT_API_URL}/api/product`,
   },
   {
     route: "/payment",
-    target: `${process.env.REACT_APP_PAYMENT_MANAGEMENT_API_URL}`,
+    target: `${process.env.PAYMENT_MANAGEMENT_API_URL}/payment`,
   },
   {
-    route: "/cart",
-    target: `${process.env.REACT_APP_CART_MANAGEMENT_API_URL}`,
+    route: "/api/cart",
+    target: `${process.env.CART_MANAGEMENT_API_URL}/api/cart`,
   },
   {
     route: "/order",
-    target: `${process.env.REACT_APP_PRODUCTCHECKOUT_MANAGEMENT_API_URL}`,
+    target: `${process.env.PRODUCTCHECKOUT_MANAGEMENT_API_URL}/order`,
   },
   {
-    route: "/seller",
-    target: `${process.env.REACT_APP_SELLER_MANAGEMENT_API_URL}`,
+    route: "/api/seller",
+    target: `${process.env.SELLER_MANAGEMENT_API_URL}/api/seller`,
   },
 ];
 
@@ -86,7 +101,28 @@ services.forEach(({ route, target }) => {
       [`^${route}`]: "",
     },
   };
+  console.log(`Proxying ${route} to ${target}`);
 
   // Apply rate limiting and timeout middleware before proxying
-  app.use(route, rateLimitAndTimeout, createProxyMiddleware(proxyOptions));
+  app.use(route, createProxyMiddleware(proxyOptions));
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({
+    code: 500,
+    status: "Error",
+    message: "Internal server error.",
+    data: null,
+  });
+});
+
+// Define port for Express server
+const PORT = process.env.PORT || 80;
+
+
+// Start Express server
+app.listen(PORT, () => {
+ console.log(`Gateway is running on port ${PORT}`);
 });

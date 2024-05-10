@@ -75,5 +75,22 @@ services:
         - cart-management
         - seller-management
 
+  api-gateway:
+    image: ayulanka.azurecr.io/ayu-api-gateway
+    build: ./api-gateway
+    ports:
+      - 80:80
+    environment:
+      - USER_MANAGEMENT_API_URL=http://user-management:3001
+      - PRODUCT_MANAGEMENT_API_URL=http://product-management:3002
+      - PAYMENT_MANAGEMENT_API_URL=http://payment-management:3007
+      - PRODUCTCHECKOUT_MANAGEMENT_API_URL=http://order-management
+      - CART_MANAGEMENT_API_URL=http://cart-management:300
+      - SELLER_MANAGEMENT_API_URL=http://seller-management:3004
+    networks:
+      - ayulanka
+    depends_on:
+      - ayulanka-web
+
 volumes:
   mongodb_data:
