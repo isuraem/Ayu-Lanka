@@ -12,16 +12,16 @@ const featuredProducts = [
 ];
 
 const bestSellingProducts = [
-  { name: 'Echinacea', description: 'Immune booster', imageUrl: 'https://image.shutterstock.com/image-photo/glass-cup-hot-aromatic-tea-260nw-1146290894.jpg' },
-  { name: 'Echinacea', description: 'Immune booster', imageUrl: 'https://image.shutterstock.com/image-photo/glass-cup-hot-aromatic-tea-260nw-1146290894.jpg' },
-  { name: 'Echinacea', description: 'Immune booster', imageUrl: 'https://image.shutterstock.com/image-photo/glass-cup-hot-aromatic-tea-260nw-1146290894.jpg' },
-  { name: 'Echinacea', description: 'Immune booster', imageUrl: 'https://image.shutterstock.com/image-photo/glass-cup-hot-aromatic-tea-260nw-1146290894.jpg' },
+  { name: 'Echinacea', description: 'Immune booster', imageUrl: 'https://herbalcosmeticsconsultants.com/wp-content/uploads/2017/06/herbal-product.png' },
+  { name: 'Echinacea', description: 'Immune booster', imageUrl: 'https://static.vecteezy.com/system/resources/thumbnails/041/912/904/small_2x/ai-generated-herbal-and-medical-plants-are-arranged-on-a-wooden-table-photo.jpg' },
+  { name: 'Echinacea', description: 'Immune booster', imageUrl: 'https://st.depositphotos.com/1755706/2584/i/450/depositphotos_25846873-stock-photo-herbal-medicine.jpg' },
+  { name: 'Echinacea', description: 'Immune booster', imageUrl: 'https://www.asbestos.com/wp-content/uploads/herbal-medicine-1.png' },
   // More best selling products
 ];
 
 const carouselImages = [
-  { src: 'https://image.shutterstock.com/image-photo/glass-cup-hot-aromatic-tea-260nw-1146290894.jpg', alt: 'Slide 1', caption: 'Discover Our Best Sellers' },
-  { src: 'https://image.shutterstock.com/image-photo/glass-cup-hot-aromatic-tea-260nw-1146290894.jpg', alt: 'Slide 2', caption: 'New Arrivals' },
+  { src: 'https://medlineplus.gov/images/HerbalMedicine_share.jpg', alt: 'Slide 1', caption: 'Discover Our Best Sellers' },
+  { src: 'https://d2jx2rerrg6sh3.cloudfront.net/image-handler/picture/2021/8/shutterstock_656977798.jpg', alt: 'Slide 2', caption: 'New Arrivals' },
   { src: 'https://image.shutterstock.com/image-photo/glass-cup-hot-aromatic-tea-260nw-1146290894.jpg', alt: 'Slide 3', caption: 'Seasonal Specials' }
   // Add more images as needed
 ];
@@ -33,7 +33,7 @@ function HomePage() {
         {carouselImages.map((img, idx) => (
           <Carousel.Item key={idx}>
             <img
-              className="d-block w-100"
+              className="d-block w-100 h-200"
               src={img.src}
               alt={img.alt}
             />
