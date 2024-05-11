@@ -8,7 +8,6 @@ const featuredProducts = [
   { name: 'Herbal Tea', description: 'Immune booster', imageUrl: 'https://image.shutterstock.com/image-photo/glass-cup-hot-aromatic-tea-260nw-1146290894.jpg' },
   { name: 'Aloevera', description: 'Aloevera', imageUrl: 'https://bhma.info/wp-content/uploads/2020/02/pestle-mortar-460x307-1.jpg' },
   { name: 'Echinacea', description: 'Immune booster', imageUrl: 'https://franchiseindia.s3.ap-south-1.amazonaws.com/uploads/content/wi/art/5b869938cc04f.jpg' },
-  // More featured products
 ];
 
 const bestSellingProducts = [
@@ -16,14 +15,12 @@ const bestSellingProducts = [
   { name: 'Echinacea', description: 'Immune booster', imageUrl: 'https://static.vecteezy.com/system/resources/thumbnails/041/912/904/small_2x/ai-generated-herbal-and-medical-plants-are-arranged-on-a-wooden-table-photo.jpg' },
   { name: 'Echinacea', description: 'Immune booster', imageUrl: 'https://st.depositphotos.com/1755706/2584/i/450/depositphotos_25846873-stock-photo-herbal-medicine.jpg' },
   { name: 'Echinacea', description: 'Immune booster', imageUrl: 'https://www.asbestos.com/wp-content/uploads/herbal-medicine-1.png' },
-  // More best selling products
 ];
 
 const carouselImages = [
   { src: 'https://medlineplus.gov/images/HerbalMedicine_share.jpg', alt: 'Slide 1', caption: 'Discover Our Best Sellers' },
   { src: 'https://d2jx2rerrg6sh3.cloudfront.net/image-handler/picture/2021/8/shutterstock_656977798.jpg', alt: 'Slide 2', caption: 'New Arrivals' },
   { src: 'https://image.shutterstock.com/image-photo/glass-cup-hot-aromatic-tea-260nw-1146290894.jpg', alt: 'Slide 3', caption: 'Seasonal Specials' }
-  // Add more images as needed
 ];
 
 function HomePage() {
