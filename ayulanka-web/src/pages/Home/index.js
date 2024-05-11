@@ -4,9 +4,9 @@ import ProductList from '../../components/ProductList';
 import './Home.css'
 
 const featuredProducts = [
-  { name: 'Herbal Tea', description: 'Calming tea blend', imageUrl: 'https://image.shutterstock.com/image-photo/glass-cup-hot-aromatic-tea-260nw-1146290894.jpg' },
-  { name: 'Echinacea', description: 'Immune booster', imageUrl: 'https://image.shutterstock.com/image-photo/glass-cup-hot-aromatic-tea-260nw-1146290894.jpg' },
-  { name: 'Echinacea', description: 'Immune booster', imageUrl: 'https://image.shutterstock.com/image-photo/glass-cup-hot-aromatic-tea-260nw-1146290894.jpg' },
+  { name: 'Natural Vitamin', description: 'Calming tea blend', imageUrl: 'https://www.shutterstock.com/shutterstock/photos/162106925/display_1500/stock-photo-natural-vitamin-pills-alternative-medicine-d-162106925.jpg' },
+  { name: 'Herbal Tea', description: 'Immune booster', imageUrl: 'https://image.shutterstock.com/image-photo/glass-cup-hot-aromatic-tea-260nw-1146290894.jpg' },
+  { name: 'Aloevera', description: 'Aloevera', imageUrl: 'https://images.app.goo.gl/6MdDHNTvdN772Zuv8' },
   { name: 'Echinacea', description: 'Immune booster', imageUrl: 'https://image.shutterstock.com/image-photo/glass-cup-hot-aromatic-tea-260nw-1146290894.jpg' },
   // More featured products
 ];
