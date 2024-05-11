@@ -6,8 +6,8 @@ import './Home.css'
 const featuredProducts = [
   { name: 'Natural Vitamin', description: 'Calming tea blend', imageUrl: 'https://www.shutterstock.com/shutterstock/photos/162106925/display_1500/stock-photo-natural-vitamin-pills-alternative-medicine-d-162106925.jpg' },
   { name: 'Herbal Tea', description: 'Immune booster', imageUrl: 'https://image.shutterstock.com/image-photo/glass-cup-hot-aromatic-tea-260nw-1146290894.jpg' },
-  { name: 'Aloevera', description: 'Aloevera', imageUrl: 'https://images.app.goo.gl/6MdDHNTvdN772Zuv8' },
-  { name: 'Echinacea', description: 'Immune booster', imageUrl: 'https://image.shutterstock.com/image-photo/glass-cup-hot-aromatic-tea-260nw-1146290894.jpg' },
+  { name: 'Aloevera', description: 'Aloevera', imageUrl: 'https://bhma.info/wp-content/uploads/2020/02/pestle-mortar-460x307-1.jpg' },
+  { name: 'Echinacea', description: 'Immune booster', imageUrl: 'https://franchiseindia.s3.ap-south-1.amazonaws.com/uploads/content/wi/art/5b869938cc04f.jpg' },
   // More featured products
 ];
 
