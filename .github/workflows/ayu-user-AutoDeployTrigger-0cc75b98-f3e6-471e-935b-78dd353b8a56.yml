@@ -1,0 +1,55 @@
+name: Trigger auto deployment for ayu-user
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ main ]
+    paths:
+    - 'userManagement/**'
+    - '.github/workflows/ayu-user-AutoDeployTrigger-0cc75b98-f3e6-471e-935b-78dd353b8a56.yml'
+
+  # Allow manual trigger 
+  workflow_dispatch:      
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions: 
+      id-token: write #This is required for requesting the OIDC JWT Token
+      contents: read #Required when GH token is used to authenticate with private repo
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+      
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        with:
+          projectBaseDir: userManagement
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AYUUSER_AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AYUUSER_AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AYUUSER_AZURE_SUBSCRIPTION_ID }}
+
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v2
+        with:
+          appSourcePath: ${{ github.workspace }}/userManagement 
+          registryUrl: ayulanka.azurecr.io
+          registryUsername: ${{ secrets.AYUUSER_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.AYUUSER_REGISTRY_PASSWORD }}
+          containerAppName: ayu-user
+          resourceGroup: CTSE_Assignment
+          imageToBuild: ayulanka.azurecr.io/ayu-user:${{ github.sha }}
+          _buildArgumentsKey_: |
+            _buildArgumentsValues_
+
+

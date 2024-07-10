@@ -1,0 +1,96 @@
+version: '3.8'
+
+services:
+  user-management:
+      image: ayulanka.azurecr.io/ayulanka/user-management:latest
+      build: ./userManagement
+      ports:
+        - 3001:3001
+      environment:
+        - MONGODB_URL=${MONGODB_URL}
+
+  product-management:
+      image: ayulanka.azurecr.io/ayulanka/product-management:latest
+      build: ./productManagement
+      ports:
+        - 3002:3002
+      environment:
+        - MONGODB_URL=${MONGODB_URL}
+
+  order-management:
+      image: ayulanka.azurecr.io/ayulanka/order-management:latest
+      build: ./productCheckoutManagement
+      ports:
+        - 3005:3005
+      environment:
+        - MONGODB_URL=${MONGODB_URL}
+
+  payment-management:
+      image: ayulanka.azurecr.io/ayulanka/payment-management:latest
+      build: ./paymentManagmenet
+      ports:
+        - 3007:3007
+      environment:
+        - MONGODB_URL=${MONGODB_URL}
+
+  cart-management:
+      image: ayulanka.azurecr.io/ayulanka/cart-management:latest
+      build: ./cartManagement
+      ports:
+        - 3006:3006
+      environment:
+        - MONGODB_URL=${MONGODB_URL}
+
+  seller-management:
+      image: ayulanka.azurecr.io/ayulanka/seller-management:latest
+      build: ./sellerManagement
+      ports:
+        - 3004:3004
+      environment:
+        - MONGODB_URL=${MONGODB_URL}
+        - CLOUD_NAME=${CLOUD_NAME}
+        - CLOUD_KEY=${CLOUD_KEY}
+        - CLOUD_KEY_SECRET=${CLOUD_KEY_SECRET}
+        - TOKEN_KEY=${TOKEN_KEY}
+        - EMAIL_API_KEY=${EMAIL_API_KEY}
+        - EMAIL_SECRET_KEY=${EMAIL_SECRET_KEY}
+
+  ayulanka-web:
+      image: ayulanka.azurecr.io/ayulanka/ayulanka-web:latest
+      build: ./ayulanka-web
+      ports:
+        - 3000:3000
+      environment:
+        - REACT_APP_USER_MANAGEMENT_API_URL=http://user-management:3001
+        - REACT_APP_PRODUCT_MANAGEMENT_API_URL=http://product-management:3002
+        - REACT_APP_PAYMENT_MANAGEMENT_API_URL=http://payment-management:3007
+        - REACT_APP_PRODUCTCHECKOUT_MANAGEMENT_API_URL=http://order-management:3005
+        - REACT_APP_CART_MANAGEMENT_API_URL=http://cart-management:3006
+        - REACT_APP_SELLER_MANAGEMENT_API_URL=http://cart-management:3004
+      depends_on:
+        - user-management
+        - product-management
+        - payment-management
+        - order-management
+        - cart-management
+        - seller-management
+
+  api-gateway:
+    image: ayulanka.azurecr.io/ayu-api-gateway
+    build: ./api-gateway
+    ports:
+      - 80:80
+    environment:
+      - USER_MANAGEMENT_API_URL=http://user-management:3001
+      - PRODUCT_MANAGEMENT_API_URL=http://product-management:3002
+      - PAYMENT_MANAGEMENT_API_URL=http://payment-management:3007
+      - PRODUCTCHECKOUT_MANAGEMENT_API_URL=http://order-management
+      - CART_MANAGEMENT_API_URL=http://cart-management:300
+      - SELLER_MANAGEMENT_API_URL=http://seller-management:3004
+    networks:
+      - ayulanka
+    depends_on:
+      - ayulanka-web
+
+volumes:
+  mongodb_data:

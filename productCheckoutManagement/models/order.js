@@ -56,7 +56,6 @@ const order = new Schema({
     paymentID: {
         type: String,
         maxlength: 100,
-        // required: true,
     },
     isOnlinePayment: {
         type: Boolean,
@@ -64,13 +63,11 @@ const order = new Schema({
         required: true,
 
     },
-
     unitPrice: {
         type: Number,
         min: 0,
         required: true,
     },
-
     quantity: {
         type: Number,
         min: 0,
@@ -81,10 +78,6 @@ const order = new Schema({
         type: Number,
         min: 0
     },
-
-
-
-
 })
 
 const Order = mongoose.model("CheckoutOrder", order);
